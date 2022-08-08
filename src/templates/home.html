@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+      <h1>coucou {{ current_user.get_id() }}</h1>
+      <h1>coucou {{ dUser_ref["nom prenom"] }} id : {{ssoEve.character_id}}</h1>
+      {% if ssoEve.is_token_expired() %}
+        <a href="{{ssoEve.get_auth_url()}}">Eve connect</button>
+      {% else %}
+        <h1>coucou {{ssoEve.character_name}} </h1>
+        <h2> {{text}} </h2>
+      {%endif%}
+      <button id="sign-out">Sign Out</button>
+		</div>
+    <img src="{{portrait}}"/>
+    {% endblock content %}
