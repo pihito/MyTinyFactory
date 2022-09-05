@@ -4,13 +4,38 @@
     <div class="card-body">
       <div class="row gx-0 align-items-center">
         <div class="col-md-4">
-          <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" />
+          <img src="{{personnage.protrait256px}}" alt="" class="card-img rounded-0" />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">{{personnage.name}}</h5>
+            <div class="list-group list-group-flush">
+             
+
+              <div class="list-group-item d-flex align-items-center">
+                <div class="flex-1 text-break">
+                <div>Eve ID</div>
+                <div class="text-white text-opacity-50">{{personnage.eveId}}</div>
+              </div>
+              </div>
+
+              <div class="list-group-item d-flex align-items-center">
+                <div class="flex-1 text-break">
+                <div>Corporation</div>
+                <div class="text-white text-opacity-50">{{personnage.corporation.name}} - {{personnage.corporation_id}}</div>
+              </div>
+              </div>
+
+              {% if personnage.alliance_id !=None or personnage.alliance_id != ""%}
+                <div class="list-group-item d-flex align-items-center">
+                  <div class="flex-1 text-break">
+                    <div>Alliance</div>
+                    <div class="text-white text-opacity-50">{{personnage.alliance.name}} - {{personnage.alliance_id}}</div>
+                  </div>
+                </div>
+              {% endif %}
+              
+            </div>
           </div>
         </div>
       </div>

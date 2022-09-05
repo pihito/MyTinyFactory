@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "..\\sample google\\firestore\\cloud-client"
 		}
 	],
 	"settings": {}

@@ -8,7 +8,7 @@ import google.auth.transport.requests
 import google.oauth2.id_token
 import requests
 import requests_toolbelt.adapters.appengine
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, auth
 from flask import (Flask, json, jsonify, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_login import LoginManager, current_user, login_required
@@ -34,7 +34,7 @@ app.config.from_object(myConfig)
 login_manager = LoginManager()
 login_manager.init_app(app)
 cred = credentials.Certificate("evetinyindustry-5946915108a7.json")
-default_app = firebase_admin.initialize_app()
+default_app = firebase_admin.initialize_app(cred)
 # flask_cors.CORS(app)
 db = firestore.client()
 
@@ -47,10 +47,11 @@ eveScope = [
     "esi-characters.read_contacts.v1",
     "esi-characters.read_agents_research.v1",
     "esi-industry.read_character_jobs.v1",
-    "esi-markets.read_character_orders.v1",
     "esi-characters.read_blueprints.v1",
+    "esi-wallet.read_corporation_wallets.v1"
 ]
 
+ 
 eveGatewayCache = EveGatewayCaching()
 # sso = EveSSO(app.config["ESI_CLIENT_ID"],app.config["ESI_SECRET_KEY"],callbackUrl,["publicData", "esi-wallet.read_character_wallet.v1", "esi-characters.read_contacts.v1", "esi-characters.read_agents_research.v1", "esi-industry.read_character_jobs.v1", "esi-markets.read_character_orders.v1", "esi-characters.read_blueprints.v1"])
 
@@ -127,18 +128,18 @@ def home():
             "home.html", dUser_ref=dUser_ref, portrait="", ssoEve=sso
         )
 
-
 @app.route("/login", methods=["GET", "POST"])
 def servLogin():
     id_token = request.headers["Authorization"].split(" ").pop()
-    app.logger.debug("\x1b[31;20m***********token google reçu***** %s\x1b[0m")
+    app.logger.debug("serLogin --- \x1b[31;20m token google reçu %s\x1b[0m")
     user = User.loadFormToken(id_token)
     user_ref = db.collection("utilisateurs").document(user.get_id())
     if user_ref != None:
         user_ref.set({"lastLogin": datetime.datetime.now()}, merge=True)
     flask_login.login_user(user)
     data = {"message": "Done", "code": "SUCCESS"}
-    return make_response(jsonify(data), 200)
+    return redirect(url_for("home"))
+    #return make_response(jsonify(data), 200)
 
 
 @app.route("/sso/callback")
@@ -179,7 +180,7 @@ def caracterCard() :
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
     return render_template(
-            "caractereCard.html", dUser_ref=dUser_ref, portrait=carac.getPhotoUrl(),portrait2=carac.getPhotoUrl(carac.PX256), ssoEve=sso) 
+            "caracterCard.html", dUser_ref=dUser_ref, portrait=carac.getPhotoUrl(),personnage=carac, ssoEve=sso) 
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App
@@ -189,4 +190,4 @@ if __name__ == "__main__":
     # the "static" directory. See:
     # http://flask.pocoo.org/docs/1.0/quickstart/#static-files. Once deployed,
     # App Engine itself will serve those files as configured in app.yaml.
-    app.run(host="127.0.0.1", port=myConfig.PORT, debug=True)
+    app.run(host="0.0.0.0", port=myConfig.PORT, debug=True)

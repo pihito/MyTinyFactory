@@ -22,37 +22,13 @@ $(function(){
 
     firebase.initializeApp(config);
 
-    // [START gae_python_state_change]
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-
-        user.getIdToken().then(function(idToken) {
-        userIdToken = idToken;
-        
-          $('#logged-in').show();
-         
-          $.ajax('/login', {
-            headers: {
-              'Authorization': 'Bearer ' + userIdToken
-            },
-            method: 'POST',
-            data: JSON.stringify({'displayName': user.displayName}),
-            contentType : 'application/json'
-          }).then(function(){
-            window.location.replace('/home');
-          });
-        });
-      } 
-    });
-    // [END gae_python_state_change]
-
   }
 
   // [START gae_python_firebase_login]
   // Firebase log-in widget
   function configureFirebaseLoginWidget() {
     var uiConfig = {
-      'signInSuccessUrl': '/',
+      'signInSuccessUrl': '/uiloggin',
       'signInOptions': [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
