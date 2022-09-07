@@ -6048,3 +6048,429 @@ Success! log to Eve
 2022-08-10 17:36:53,299 :: INFO :: Thread-42 :: _internal :: 127.0.0.1 - - [10/Aug/2022 17:36:53] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
 2022-08-10 17:36:53,306 :: INFO :: Thread-43 :: _internal :: 127.0.0.1 - - [10/Aug/2022 17:36:53] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
 2022-08-10 17:36:53,458 :: INFO :: Thread-44 :: _internal :: 127.0.0.1 - - [10/Aug/2022 17:36:53] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 17:15:44,254 :: INFO :: MainThread :: _internal ::  * Running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+2022-09-05 17:15:44,261 :: INFO :: MainThread :: _internal ::  * Restarting with stat
+2022-09-05 17:15:57,387 :: INFO :: Thread-9 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:15:57] "GET / HTTP/1.1" 200 -
+2022-09-05 17:15:57,422 :: INFO :: Thread-10 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:15:57] "GET /static/style.css HTTP/1.1" 200 -
+2022-09-05 17:15:57,431 :: INFO :: Thread-11 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:15:57] "GET /static/login.js HTTP/1.1" 200 -
+2022-09-05 17:15:57,663 :: INFO :: Thread-12 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:15:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-09-05 17:16:04,541 :: INFO :: Thread-13 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:04] "GET / HTTP/1.1" 200 -
+2022-09-05 17:16:04,603 :: INFO :: Thread-14 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:04] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:16:04,612 :: INFO :: Thread-15 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:04] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:16:06,764 :: DEBUG :: Thread-16 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:16:06,771 :: INFO :: Thread-17 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:06] "GET / HTTP/1.1" 200 -
+2022-09-05 17:16:06,838 :: INFO :: Thread-18 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:06] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:16:06,843 :: INFO :: Thread-19 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:06] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:16:06,985 :: INFO :: Thread-16 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:06] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 17:16:07,034 :: ERROR :: Thread-16 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662390966 < 1662390967. Check that your computer's clock is set correctly.
+2022-09-05 17:16:07,074 :: DEBUG :: Thread-20 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:16:07,128 :: DEBUG :: Thread-20 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:16:07,545 :: INFO :: Thread-20 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:16:07,554 :: DEBUG :: Thread-22 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:16:07,619 :: DEBUG :: Thread-22 :: app :: home - token valid : False
+2022-09-05 17:16:07,620 :: DEBUG :: Thread-22 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,665 :: DEBUG :: Thread-22 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,670 :: DEBUG :: Thread-22 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,673 :: INFO :: Thread-22 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:16:07,688 :: DEBUG :: Thread-25 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:16:07,755 :: DEBUG :: Thread-25 :: app :: home - token valid : False
+2022-09-05 17:16:07,756 :: DEBUG :: Thread-25 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,759 :: DEBUG :: Thread-25 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,760 :: DEBUG :: Thread-25 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:16:07,763 :: INFO :: Thread-25 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:16:07,795 :: INFO :: Thread-26 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/vendor.min.css HTTP/1.1" 200 -
+2022-09-05 17:16:07,796 :: INFO :: Thread-29 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/app.min.css HTTP/1.1" 200 -
+2022-09-05 17:16:07,814 :: INFO :: Thread-31 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/js/app.min.js HTTP/1.1" 200 -
+2022-09-05 17:16:07,841 :: INFO :: Thread-30 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/js/vendor.min.js HTTP/1.1" 200 -
+2022-09-05 17:16:07,889 :: INFO :: Thread-32 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/images/pattern.png HTTP/1.1" 200 -
+2022-09-05 17:16:07,892 :: INFO :: Thread-33 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/images/logo.png HTTP/1.1" 200 -
+2022-09-05 17:16:07,897 :: INFO :: Thread-34 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/images/cover.jpg HTTP/1.1" 200 -
+2022-09-05 17:16:07,932 :: INFO :: Thread-35 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1" 200 -
+2022-09-05 17:16:07,969 :: INFO :: Thread-36 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:07] "GET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+2022-09-05 17:16:16,277 :: INFO :: Thread-37 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:16] "[31m[1mGET /sso/callback?code=YLJikBz5QEeFjk6BsTtY8w&state=unique-state HTTP/1.1[0m" 401 -
+2022-09-05 17:16:16,544 :: INFO :: Thread-38 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-09-05 17:16:46,424 :: INFO :: Thread-39 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:16:46] "[31m[1mGET /sso/callback?code=KKAefm6lNkKf5f3zrBIfXQ&state=unique-state HTTP/1.1[0m" 401 -
+2022-09-05 17:17:01,902 :: DEBUG :: Thread-40 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:17:02,010 :: DEBUG :: Thread-40 :: app :: home - token valid : False
+2022-09-05 17:17:02,011 :: DEBUG :: Thread-40 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:17:02,013 :: DEBUG :: Thread-40 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:17:02,014 :: DEBUG :: Thread-40 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:17:02,016 :: INFO :: Thread-40 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:17:02,042 :: INFO :: Thread-41 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,052 :: INFO :: Thread-44 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,055 :: INFO :: Thread-45 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,063 :: INFO :: Thread-46 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,095 :: INFO :: Thread-47 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,100 :: INFO :: Thread-48 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,107 :: INFO :: Thread-49 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,116 :: INFO :: Thread-50 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 17:17:02,122 :: INFO :: Thread-51 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:02] "[36mGET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+2022-09-05 17:17:07,719 :: INFO :: Thread-52 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:17:07] "[31m[1mGET /sso/callback?code=SD0aGggaF0uQYZhU4eQbjQ&state=unique-state HTTP/1.1[0m" 401 -
+2022-09-05 17:18:58,523 :: INFO :: MainThread :: _internal ::  * Running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+2022-09-05 17:18:58,527 :: INFO :: MainThread :: _internal ::  * Restarting with stat
+2022-09-05 17:19:15,606 :: INFO :: Thread-9 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:15] "GET / HTTP/1.1" 200 -
+2022-09-05 17:19:15,630 :: INFO :: Thread-10 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:15] "GET /static/style.css HTTP/1.1" 200 -
+2022-09-05 17:19:15,845 :: INFO :: Thread-11 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:15] "GET /static/login.js HTTP/1.1" 200 -
+2022-09-05 17:19:22,632 :: INFO :: Thread-12 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:22] "GET / HTTP/1.1" 200 -
+2022-09-05 17:19:22,656 :: INFO :: Thread-13 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:22] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:22,896 :: INFO :: Thread-14 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:22] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:24,402 :: INFO :: Thread-15 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:24] "GET / HTTP/1.1" 200 -
+2022-09-05 17:19:24,405 :: DEBUG :: Thread-16 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:24,582 :: INFO :: Thread-16 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:24] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 17:19:24,594 :: ERROR :: Thread-16 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662391164 < 1662391165. Check that your computer's clock is set correctly.
+2022-09-05 17:19:24,669 :: INFO :: Thread-17 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:24] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:24,731 :: INFO :: Thread-18 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:24] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:24,944 :: DEBUG :: Thread-19 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:24,998 :: INFO :: Thread-19 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:24] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 17:19:25,001 :: ERROR :: Thread-19 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662391164 < 1662391165. Check that your computer's clock is set correctly.
+2022-09-05 17:19:36,326 :: INFO :: Thread-20 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:36] "[31m[1mGET /home HTTP/1.1[0m" 401 -
+2022-09-05 17:19:39,169 :: DEBUG :: Thread-21 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:39,226 :: DEBUG :: Thread-21 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:39,585 :: INFO :: Thread-21 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:39] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:39,589 :: DEBUG :: Thread-22 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:39,650 :: DEBUG :: Thread-22 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:39,745 :: INFO :: Thread-22 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:39] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:40,059 :: DEBUG :: Thread-25 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:40,114 :: DEBUG :: Thread-25 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:40,237 :: INFO :: Thread-25 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:40] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:43,212 :: INFO :: Thread-27 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:43] "GET / HTTP/1.1" 200 -
+2022-09-05 17:19:43,270 :: INFO :: Thread-28 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:43] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:43,582 :: INFO :: Thread-29 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:43] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:44,092 :: DEBUG :: Thread-30 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:44,146 :: DEBUG :: Thread-30 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:44,256 :: INFO :: Thread-30 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:44] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:44,358 :: DEBUG :: Thread-32 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:44,414 :: DEBUG :: Thread-32 :: app :: home - token valid : False
+2022-09-05 17:19:44,415 :: DEBUG :: Thread-32 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:44,449 :: DEBUG :: Thread-32 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:44,454 :: DEBUG :: Thread-32 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:44,456 :: INFO :: Thread-32 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:44] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:19:44,581 :: INFO :: Thread-35 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:44] "GET / HTTP/1.1" 200 -
+2022-09-05 17:19:44,780 :: INFO :: Thread-36 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:44] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:44,843 :: INFO :: Thread-37 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:44] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:45,058 :: DEBUG :: Thread-38 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:45,117 :: DEBUG :: Thread-38 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:45,238 :: INFO :: Thread-38 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:45,242 :: DEBUG :: Thread-39 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:45,299 :: DEBUG :: Thread-39 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:45,381 :: INFO :: Thread-39 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:45,697 :: DEBUG :: Thread-42 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 17:19:45,752 :: DEBUG :: Thread-42 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:45,836 :: INFO :: Thread-42 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 17:19:45,961 :: DEBUG :: Thread-44 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:46,008 :: DEBUG :: Thread-44 :: app :: home - token valid : False
+2022-09-05 17:19:46,009 :: DEBUG :: Thread-44 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,011 :: DEBUG :: Thread-44 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,013 :: DEBUG :: Thread-44 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,017 :: INFO :: Thread-44 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:19:46,150 :: DEBUG :: Thread-47 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:46,210 :: DEBUG :: Thread-47 :: app :: home - token valid : False
+2022-09-05 17:19:46,211 :: DEBUG :: Thread-47 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,213 :: DEBUG :: Thread-47 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,215 :: DEBUG :: Thread-47 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:46,217 :: INFO :: Thread-47 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:19:46,336 :: INFO :: Thread-50 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/vendor.min.css HTTP/1.1" 200 -
+2022-09-05 17:19:46,541 :: INFO :: Thread-51 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/app.min.css HTTP/1.1" 200 -
+2022-09-05 17:19:46,544 :: INFO :: Thread-52 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/js/vendor.min.js HTTP/1.1" 200 -
+2022-09-05 17:19:46,551 :: INFO :: Thread-53 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/js/app.min.js HTTP/1.1" 200 -
+2022-09-05 17:19:46,608 :: INFO :: Thread-54 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/images/pattern.png HTTP/1.1" 200 -
+2022-09-05 17:19:46,917 :: INFO :: Thread-55 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1" 200 -
+2022-09-05 17:19:46,919 :: INFO :: Thread-56 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+2022-09-05 17:19:46,959 :: INFO :: Thread-57 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/images/logo.png HTTP/1.1" 200 -
+2022-09-05 17:19:46,975 :: INFO :: Thread-58 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:46] "GET /static/assets/css/images/cover.jpg HTTP/1.1" 200 -
+2022-09-05 17:19:51,723 :: DEBUG :: Thread-59 :: app :: token app code  : Rrgz-Ud-50eUGufOV0_Frg
+2022-09-05 17:19:51,856 :: DEBUG :: Thread-59 :: ssotools :: __send_token_request :: Request to get token sent to URL https://login.eveonline.com/v2/oauth/token with headers {'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'login.eveonline.com', 'Authorization': 'Basic ZDc5MmU4ZWU1ODBiNDAwYzhkZDllZWJkM2M0NjhjY2U6TzNNUUdHVUxFZ1ZkZlVBSXljZEp2R0owYjBNWnU5QXdsdlZLVU04eA=='} and form values: {'grant_type': 'authorization_code', 'code': 'Rrgz-Ud-50eUGufOV0_Frg'}
+2022-09-05 17:19:51,857 :: DEBUG :: Thread-59 :: ssotools :: 
+Verifying access token JWT...
+2022-09-05 17:19:51,975 :: INFO :: Thread-59 :: ssotools :: 
+Success! log to Eve
+2022-09-05 17:19:52,258 :: DEBUG :: Thread-59 :: app :: Callback -- Store token in DB --
+2022-09-05 17:19:52,259 :: DEBUG :: Thread-59 :: app :: Callback -- SSO Refresh  : None
+2022-09-05 17:19:52,259 :: DEBUG :: Thread-59 :: app :: Callback --  SSO access_token  : eyJhbGciOiJSUzI1NiIsImtpZCI6IkpXVC1TaWduYXR1cmUtS2V5IiwidHlwIjoiSldUIn0.eyJzY3AiOlsicHVibGljRGF0YSIsImVzaS13YWxsZXQucmVhZF9jaGFyYWN0ZXJfd2FsbGV0LnYxIiwiZXNpLWNoYXJhY3RlcnMucmVhZF9jb250YWN0cy52MSIsImVzaS1jaGFyYWN0ZXJzLnJlYWRfYWdlbnRzX3Jlc2VhcmNoLnYxIiwiZXNpLWluZHVzdHJ5LnJlYWRfY2hhcmFjdGVyX2pvYnMudjEiLCJlc2ktY2hhcmFjdGVycy5yZWFkX2JsdWVwcmludHMudjEiLCJlc2ktd2FsbGV0LnJlYWRfY29ycG9yYXRpb25fd2FsbGV0cy52MSJdLCJqdGkiOiJjOTFmZjUxNi0yZDgxLTQ0YzAtYTIxYS0yYzNkNTRlMTQzMWUiLCJraWQiOiJKV1QtU2lnbmF0dXJlLUtleSIsInN1YiI6IkNIQVJBQ1RFUjpFVkU6MjExNzgxNjQwMiIsImF6cCI6ImQ3OTJlOGVlNTgwYjQwMGM4ZGQ5ZWViZDNjNDY4Y2NlIiwidGVuYW50IjoidHJhbnF1aWxpdHkiLCJ0aWVyIjoibGl2ZSIsInJlZ2lvbiI6IndvcmxkIiwiYXVkIjoiRVZFIE9ubGluZSIsIm5hbWUiOiJtaXJhaWxsYSBzYW5kZXIiLCJvd25lciI6InpQRUNacHZwcjlDRk5iRU5wbmhhTFczbmRmcz0iLCJleHAiOjE2NjIzOTIzOTMsImlhdCI6MTY2MjM5MTE5MywiaXNzIjoibG9naW4uZXZlb25saW5lLmNvbSJ9.YGMBklL7mo5B4Yd_O0TwOrF3q1ChwItNB8oEMwTHeesZAD3YdksJEk_RjgFbWwTPPsUwGOtQRxrZDeKXhwYcaBsaAXtmaHmGR45XuO1M35Od64qRDAonindHI2eQ7KZ6jXGh1NgMHJ3pG-rdcfocBrm9JCiBpTkV7bfDmqsqqqCn8ZefOg8R7b3gZVXqFW3BCVS75hUK_KAW03R1hhnSjheTEGOwsdhfdrFnYKf7EoIrj-Mt3lTHCIzxSOCN9q8j22NTHnyEYAP4elbhAiwxeNBIW2moV3y0mq6R8z0trNbc23kt0zFOQaHkbygxAF_DPYaIuwtOPGGEP_jF3aBO9Q
+2022-09-05 17:19:52,347 :: INFO :: Thread-59 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:52] "[32mGET /sso/callback?code=Rrgz-Ud-50eUGufOV0_Frg&state=unique-state HTTP/1.1[0m" 302 -
+2022-09-05 17:19:52,353 :: DEBUG :: Thread-60 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 17:19:52,410 :: DEBUG :: Thread-60 :: app :: home - token valid : True
+2022-09-05 17:19:53,572 :: DEBUG :: Thread-60 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:53,574 :: DEBUG :: Thread-60 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:19:53,577 :: INFO :: Thread-60 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:53] "GET /home HTTP/1.1" 200 -
+2022-09-05 17:19:53,917 :: INFO :: Thread-64 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:53] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:53,924 :: INFO :: Thread-65 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:53] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,177 :: INFO :: Thread-66 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,241 :: INFO :: Thread-67 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,245 :: INFO :: Thread-68 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,275 :: INFO :: Thread-69 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,279 :: INFO :: Thread-70 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,286 :: INFO :: Thread-71 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 17:19:54,491 :: INFO :: Thread-72 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:19:54] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,466 :: DEBUG :: Thread-73 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 17:20:01,470 :: INFO :: Thread-73 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "GET /caracter HTTP/1.1" 200 -
+2022-09-05 17:20:01,492 :: INFO :: Thread-74 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,493 :: INFO :: Thread-77 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,807 :: INFO :: Thread-78 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,815 :: INFO :: Thread-79 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,842 :: INFO :: Thread-80 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,846 :: INFO :: Thread-81 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,855 :: INFO :: Thread-82 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 17:20:01,857 :: INFO :: Thread-83 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:01] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 17:20:02,123 :: INFO :: Thread-84 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:02] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 17:20:05,531 :: INFO :: Thread-85 :: _internal :: 127.0.0.1 - - [05/Sep/2022 17:20:05] "[33mGET /walletCorpo HTTP/1.1[0m" 404 -
+2022-09-05 21:27:03,918 :: INFO :: MainThread :: _internal ::  * Running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+2022-09-05 21:27:03,926 :: INFO :: MainThread :: _internal ::  * Restarting with stat
+2022-09-05 21:27:09,328 :: INFO :: Thread-9 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:09] "GET / HTTP/1.1" 200 -
+2022-09-05 21:27:09,371 :: INFO :: Thread-10 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:09,563 :: INFO :: Thread-11 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:09] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:16,581 :: INFO :: Thread-12 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:16] "GET / HTTP/1.1" 200 -
+2022-09-05 21:27:16,623 :: INFO :: Thread-13 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:16] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:16,840 :: INFO :: Thread-14 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:16] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:19,184 :: INFO :: Thread-15 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:19] "GET / HTTP/1.1" 200 -
+2022-09-05 21:27:19,191 :: DEBUG :: Thread-16 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 21:27:19,448 :: INFO :: Thread-16 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:19] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 21:27:19,455 :: INFO :: Thread-17 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:19] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:19,483 :: ERROR :: Thread-16 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662406039 < 1662406040. Check that your computer's clock is set correctly.
+2022-09-05 21:27:19,521 :: INFO :: Thread-18 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:19] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:19,776 :: DEBUG :: Thread-19 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 21:27:19,839 :: INFO :: Thread-19 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:19] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 21:27:19,842 :: ERROR :: Thread-19 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662406039 < 1662406040. Check that your computer's clock is set correctly.
+2022-09-05 21:27:24,504 :: INFO :: Thread-20 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:24] "GET / HTTP/1.1" 200 -
+2022-09-05 21:27:24,548 :: INFO :: Thread-21 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:24] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:24,769 :: INFO :: Thread-22 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:24] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:25,318 :: DEBUG :: Thread-23 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 21:27:25,383 :: DEBUG :: Thread-23 :: loggin :: sub ID : 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 21:27:25,801 :: INFO :: Thread-25 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:25] "GET / HTTP/1.1" 200 -
+2022-09-05 21:27:25,890 :: INFO :: Thread-23 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:25] "[32mPOST /login HTTP/1.1[0m" 302 -
+2022-09-05 21:27:26,137 :: INFO :: Thread-26 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:26] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:26,139 :: INFO :: Thread-27 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:26] "[36mGET /static/login.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:26,420 :: DEBUG :: Thread-28 :: app :: serLogin --- [31;20m token google reçu %s[0m
+2022-09-05 21:27:26,504 :: INFO :: Thread-28 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:26] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2022-09-05 21:27:26,508 :: ERROR :: Thread-28 :: _internal :: Error on request:
+Traceback (most recent call last):
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 335, in run_wsgi
+    execute(self.server.app)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\werkzeug\serving.py", line 322, in execute
+    application_iter = app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2076, in wsgi_app
+    response = self.handle_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "D:\dev\projet\MyTinyFactory\src\app.py", line 135, in servLogin
+    user = User.loadFormToken(id_token)
+  File "D:\dev\projet\MyTinyFactory\src\auth\loggin.py", line 37, in loadFormToken
+    tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 202, in verify_firebase_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\oauth2\id_token.py", line 139, in verify_token
+    clock_skew_in_seconds=clock_skew_in_seconds,
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 286, in decode
+    _verify_iat_and_exp(payload, clock_skew_in_seconds)
+  File "d:\dev\projet\MyTinyFactory\.venv\lib\site-packages\google\auth\jwt.py", line 202, in _verify_iat_and_exp
+    now, iat
+ValueError: Token used too early, 1662406046 < 1662406047. Check that your computer's clock is set correctly.
+2022-09-05 21:27:31,821 :: DEBUG :: Thread-29 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 21:27:31,911 :: DEBUG :: Thread-29 :: app :: home - token valid : False
+2022-09-05 21:27:31,913 :: DEBUG :: Thread-29 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:27:31,960 :: DEBUG :: Thread-29 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:27:31,968 :: DEBUG :: Thread-29 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:27:31,973 :: INFO :: Thread-29 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:31] "GET /home HTTP/1.1" 200 -
+2022-09-05 21:27:32,008 :: INFO :: Thread-30 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,074 :: INFO :: Thread-33 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,321 :: INFO :: Thread-34 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,324 :: INFO :: Thread-35 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,447 :: INFO :: Thread-36 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,456 :: INFO :: Thread-37 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,461 :: INFO :: Thread-38 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,473 :: INFO :: Thread-39 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 21:27:32,638 :: INFO :: Thread-40 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:27:32] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 21:28:16,963 :: DEBUG :: Thread-41 :: app :: token app code  : x8BNYUK9uU6tEA-c4zCwgA
+2022-09-05 21:28:17,101 :: DEBUG :: Thread-41 :: ssotools :: __send_token_request :: Request to get token sent to URL https://login.eveonline.com/v2/oauth/token with headers {'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'login.eveonline.com', 'Authorization': 'Basic ZDc5MmU4ZWU1ODBiNDAwYzhkZDllZWJkM2M0NjhjY2U6TzNNUUdHVUxFZ1ZkZlVBSXljZEp2R0owYjBNWnU5QXdsdlZLVU04eA=='} and form values: {'grant_type': 'authorization_code', 'code': 'x8BNYUK9uU6tEA-c4zCwgA'}
+2022-09-05 21:28:17,104 :: DEBUG :: Thread-41 :: ssotools :: 
+Verifying access token JWT...
+2022-09-05 21:28:17,198 :: INFO :: Thread-41 :: ssotools :: 
+Success! log to Eve
+2022-09-05 21:28:17,590 :: DEBUG :: Thread-41 :: app :: Callback -- Store token in DB --
+2022-09-05 21:28:17,591 :: DEBUG :: Thread-41 :: app :: Callback -- SSO Refresh  : None
+2022-09-05 21:28:17,592 :: DEBUG :: Thread-41 :: app :: Callback --  SSO access_token  : eyJhbGciOiJSUzI1NiIsImtpZCI6IkpXVC1TaWduYXR1cmUtS2V5IiwidHlwIjoiSldUIn0.eyJzY3AiOlsicHVibGljRGF0YSIsImVzaS13YWxsZXQucmVhZF9jaGFyYWN0ZXJfd2FsbGV0LnYxIiwiZXNpLWNoYXJhY3RlcnMucmVhZF9jb250YWN0cy52MSIsImVzaS1jaGFyYWN0ZXJzLnJlYWRfYWdlbnRzX3Jlc2VhcmNoLnYxIiwiZXNpLWluZHVzdHJ5LnJlYWRfY2hhcmFjdGVyX2pvYnMudjEiLCJlc2ktY2hhcmFjdGVycy5yZWFkX2JsdWVwcmludHMudjEiLCJlc2ktd2FsbGV0LnJlYWRfY29ycG9yYXRpb25fd2FsbGV0cy52MSJdLCJqdGkiOiIzNjg2MmYyMC05MjQ0LTQ1ZjktYmQ3Ny00ZGY1Yzk2NTU2ZGQiLCJraWQiOiJKV1QtU2lnbmF0dXJlLUtleSIsInN1YiI6IkNIQVJBQ1RFUjpFVkU6MjExNzgxNjQwMiIsImF6cCI6ImQ3OTJlOGVlNTgwYjQwMGM4ZGQ5ZWViZDNjNDY4Y2NlIiwidGVuYW50IjoidHJhbnF1aWxpdHkiLCJ0aWVyIjoibGl2ZSIsInJlZ2lvbiI6IndvcmxkIiwiYXVkIjoiRVZFIE9ubGluZSIsIm5hbWUiOiJtaXJhaWxsYSBzYW5kZXIiLCJvd25lciI6InpQRUNacHZwcjlDRk5iRU5wbmhhTFczbmRmcz0iLCJleHAiOjE2NjI0MDcyOTksImlhdCI6MTY2MjQwNjA5OSwiaXNzIjoibG9naW4uZXZlb25saW5lLmNvbSJ9.VWOa9YFpDo7bmXC90SNbgGf2vClodmyl8OQScuBeoorKYVinNhH3t-4CUhN9Jvn5Z_C32ZM0J89BJ6O8T_5tSUj_b8pI3dfNqNqvODVsDk1Pk9haHGlvz437vF34AsKYb_gsvaK01ZivNsvPQ4IW_PoojJL1-toA06iuJjpQJCayMGUPLFMKO6n3eCxj-MwEfYtelB6DSi98MmTulcu9ud3qVHEDDiFdTx0PmgsiNmlN_b3raRNDWjNTSqXaQGFZNY9rVnJ82DSbUziH0kNoD4h030PMOXuO0Xh9yHPes72N4yP1DA1hV9fBlxx7mC24ZGbxSMAUSk4yMABiIYF-yA
+2022-09-05 21:28:17,703 :: INFO :: Thread-41 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:17] "[32mGET /sso/callback?code=x8BNYUK9uU6tEA-c4zCwgA&state=unique-state HTTP/1.1[0m" 302 -
+2022-09-05 21:28:17,712 :: DEBUG :: Thread-42 :: app :: home - user UUID 3vJB97ElMaRpJabLgobyM8ht7VD2
+2022-09-05 21:28:17,786 :: DEBUG :: Thread-42 :: app :: home - token valid : True
+2022-09-05 21:28:19,018 :: DEBUG :: Thread-42 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:28:19,020 :: DEBUG :: Thread-42 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:28:19,026 :: INFO :: Thread-42 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "GET /home HTTP/1.1" 200 -
+2022-09-05 21:28:19,401 :: INFO :: Thread-46 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,407 :: INFO :: Thread-47 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,643 :: INFO :: Thread-48 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,736 :: INFO :: Thread-49 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/webfonts/fa-solid-900.woff2 HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,744 :: INFO :: Thread-50 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,803 :: INFO :: Thread-51 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,817 :: INFO :: Thread-52 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,826 :: INFO :: Thread-53 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 21:28:19,967 :: INFO :: Thread-54 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:19] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,231 :: DEBUG :: Thread-55 :: ssotools :: authentification URL : https://login.eveonline.com/v2/oauth/authorize/?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fsso%2Fcallback&client_id=d792e8ee580b400c8dd9eebd3c468cce&scope=publicData+esi-wallet.read_character_wallet.v1+esi-characters.read_contacts.v1+esi-characters.read_agents_research.v1+esi-industry.read_character_jobs.v1+esi-characters.read_blueprints.v1+esi-wallet.read_corporation_wallets.v1&state=unique-state
+2022-09-05 21:28:33,237 :: INFO :: Thread-55 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "GET /caracter HTTP/1.1" 200 -
+2022-09-05 21:28:33,260 :: INFO :: Thread-56 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/css/vendor.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,578 :: INFO :: Thread-59 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/css/app.min.css HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,588 :: INFO :: Thread-60 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/js/vendor.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,902 :: INFO :: Thread-61 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/js/app.min.js HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,940 :: INFO :: Thread-62 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/css/images/pattern.png HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,945 :: INFO :: Thread-63 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/css/images/logo.png HTTP/1.1[0m" 304 -
+2022-09-05 21:28:33,952 :: INFO :: Thread-64 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:33] "[36mGET /static/assets/css/images/cover.jpg HTTP/1.1[0m" 304 -
+2022-09-05 21:28:39,802 :: INFO :: Thread-65 :: _internal :: 127.0.0.1 - - [05/Sep/2022 21:28:39] "[33mGET /walletCorpo HTTP/1.1[0m" 404 -
+2022-09-05 21:39:11,579 :: INFO :: MainThread :: _internal ::  * Running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+2022-09-05 21:39:11,583 :: INFO :: MainThread :: _internal ::  * Restarting with stat

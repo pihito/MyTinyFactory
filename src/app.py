@@ -143,7 +143,6 @@ def servLogin():
 
 
 @app.route("/sso/callback")
-@login_required
 def callback() :
     # l'utilisateur vient de se signer pour le SSO de Eve, on crée l'objet sso
     # on crontrole le token
