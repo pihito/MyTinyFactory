@@ -12,11 +12,6 @@ class Config(object):
     HOST = 'localhost'
 
     # -----------------------------------------------------
-    # SQL Alchemy configs
-    # -----------------------------------------------------
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
-
-    # -----------------------------------------------------
     # ESI Configs
     # -----------------------------------------------------
     ESI_DATASOURCE = 'tranquility'  # Change it to 'singularity' to use the test server

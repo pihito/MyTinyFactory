@@ -19,6 +19,7 @@ from config.environnement import DevelopmentConfig
 from config.logcfg import logger_config
 from eveGateway.eveProxy import ProxyCaracter,EveGatewayCaching
 from eveGateway.ssotools import EveSSO
+from eveGateway.CropoWalletProxy import CorporationWalletProxy
 
 from webconfig import myConfig
 
@@ -48,7 +49,8 @@ eveScope = [
     "esi-characters.read_agents_research.v1",
     "esi-industry.read_character_jobs.v1",
     "esi-characters.read_blueprints.v1",
-    "esi-wallet.read_corporation_wallets.v1"
+    "esi-wallet.read_corporation_wallets.v1",
+    "esi-corporations.read_divisions.v1"
 ]
 
  
@@ -180,6 +182,16 @@ def caracterCard() :
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
     return render_template(
             "caracterCard.html", dUser_ref=dUser_ref, portrait=carac.getPhotoUrl(),personnage=carac, ssoEve=sso) 
+
+@app.route("/gobalcropowallet")
+@login_required
+def gobalcropowallet() : 
+    dUser_ref : dict = current_user.get_data().get().to_dict()
+    sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
+    carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
+    corpoWallet : CorporationWalletProxy = CorporationWalletProxy(carac.corporation_id,sso)
+    wallet = corpoWallet.allDivisionByName
+    return render_template('mainCorporateWallet.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = wallet)
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

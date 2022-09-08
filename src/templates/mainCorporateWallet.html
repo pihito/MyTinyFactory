@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- BEGIN row -->
+    <div class="row">
+        {% for name,balance in walletData.items() %}
+        <!-- BEGIN col-3 -->
+        <div class="col-xl-4 col-lg-6">
+            <a href="#" class="card text-decoration-none">
+                <div class="card-body d-flex align-items-center text-white m-5px bg-white bg-opacity-15">
+                <div class="flex-fill">
+                    <div class="mb-1">{{name}}</div>
+                    <h2>{{ "{:,.0f} ISK".format(balance) }} </h2>
+                    <div>Today, 11:25AM</div>
+                </div>
+                </div>
+                
+                <!-- card-arrow -->
+                <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+                </div>
+            </a>
+        </div>
+    
+        {%endfor %}
+    </div>
+   
+{% endblock content %}

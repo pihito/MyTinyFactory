@@ -4,26 +4,27 @@ from dataclasses import dataclass
 
 from eveGateway.BaseProxy import ProxyEve, ProxyException
 from eveGateway.ssotools import EveSSO, SSOException
+from enum import Enum, unique
 
-
-@enum.unique
+@unique
 class ProxyWalletDivisionField(Enum) :
     f_balance = "balance"
     f_division  = "division"
 
-@enum.unique
+@unique
 class proxyWalletDivisionNameField(Enum) : 
     f_division : str = "division"
     f_name : str = "name"
+    f_wallet = "wallet"
+    f_hangar =  "hangar"
 
-class corporationWalletProxy (ProxyEve): 
-    
+class CorporationWalletProxy (ProxyEve): 
     _corpo_id: str = None
     _walletdivision : dict = dict()
     _walletdivisionName : dict = dict()
 
     def __init__(self, corpo_id : str, sso : EveSSO ) : 
-        super.__init___(sso)
+        super().__init__(sso)
         self._corpo_id = corpo_id
         url_path: str = (
                 "https://esi.evetech.net/latest/corporations/{}/wallets".format(
@@ -41,9 +42,15 @@ class corporationWalletProxy (ProxyEve):
                 )
             )
         temp = self.request(url_path)
-        for d in temp.wallet : 
-            self._walletdivisionName[d[proxyWalletDivisionNameField.f_name.value]] = d[proxyWalletDivisionNameField.f_division.value]
-
+        for d in temp[proxyWalletDivisionNameField.f_wallet.value] : 
+           
+            if proxyWalletDivisionNameField.f_name.value in d : 
+                self._walletdivisionName[d[proxyWalletDivisionNameField.f_name.value]] = d[proxyWalletDivisionNameField.f_division.value]
+            else : 
+                if d[proxyWalletDivisionNameField.f_division.value] == 1 : 
+                    self._walletdivisionName["main wallet"] = d[proxyWalletDivisionNameField.f_division.value] 
+                else : 
+                    self._walletdivisionName[proxyWalletDivisionNameField.f_division.value] = d[proxyWalletDivisionNameField.f_division.value]
     def getDivision(self, division : int) -> int : 
         ret = None
         if division in self._walletdivision : 
