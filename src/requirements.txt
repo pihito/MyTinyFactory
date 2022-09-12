@@ -20,3 +20,4 @@ requests-toolbelt==0.9.1
 google-cloud-datastore==2.4.0
 firebase-admin
 google-auth
+flask-restful

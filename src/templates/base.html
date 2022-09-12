@@ -8,10 +8,11 @@
 	<meta name="author" content="" />
 	
   	<!-- ================== BEGIN core-css ================== -->
-      <link href="{{ url_for('static', filename='assets/css/vendor.min.css') }}" rel="stylesheet" />
-      <link href="{{ url_for('static', filename='assets/css/app.min.css')}}" rel="stylesheet" />
-      <!-- ================== END core-css ================== -->
+    <link href="{{ url_for('static', filename='assets/css/vendor.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='assets/css/app.min.css')}}" rel="stylesheet" />
+    <!-- ================== END core-css ================== -->
 	
+	{% block addCss %}{% endblock addCss %}
 </head>
 <body>
 	<!-- BEGIN #app -->
@@ -48,6 +49,6 @@
 	<script src="{{ url_for('static', filename='assets/js/vendor.min.js')}}"></script>
 	<script src="{{ url_for('static', filename='assets/js/app.min.js')}}"></script>
 	<!-- ================== END core-js ================== -->
-	
+	{% block addScript %}{% endblock addScript %}
 </body>
 </html>

@@ -13,13 +13,16 @@ from flask import (Flask, json, jsonify, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_login import LoginManager, current_user, login_required
 from requests import HTTPError
+from flask_restful import Api
 
 from auth.loggin import User
 from config.environnement import DevelopmentConfig
 from config.logcfg import logger_config
 from eveGateway.eveProxy import ProxyCaracter,EveGatewayCaching
 from eveGateway.ssotools import EveSSO
-from eveGateway.CropoWalletProxy import CorporationWalletProxy
+from eveGateway.CropoWalletProxy import CorporationWalletProxy,CorporationWalletJournalProxy
+
+from api.corpoJournal import ApiCorpoJournal
 
 from webconfig import myConfig
 
@@ -34,6 +37,8 @@ app = Flask(__name__)
 app.config.from_object(myConfig)
 login_manager = LoginManager()
 login_manager.init_app(app)
+api = Api(app)
+
 cred = credentials.Certificate("evetinyindustry-5946915108a7.json")
 default_app = firebase_admin.initialize_app(cred)
 # flask_cors.CORS(app)
@@ -192,6 +197,18 @@ def gobalcropowallet() :
     corpoWallet : CorporationWalletProxy = CorporationWalletProxy(carac.corporation_id,sso)
     wallet = corpoWallet.allDivisionByName
     return render_template('mainCorporateWallet.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = wallet)
+
+@app.route("/corpojournal")
+@login_required
+def corpoJournal() : 
+    dUser_ref : dict = current_user.get_data().get().to_dict()
+    sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
+    carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
+    walletJournal = CorporationWalletJournalProxy(carac.corporation_id,1,sso)
+    return render_template('mainCorporateWalletJournal.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = walletJournal.journal)
+
+
+api.add_resource(ApiCorpoJournal, '/api/corpoJournal')
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

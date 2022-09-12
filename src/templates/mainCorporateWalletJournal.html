@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ref_type</th>
+          <th scope="col">context_name</th>
+          <th scope="col">amount</th>
+          <th scope="col">description</th>
+        </tr>    
+    </thead>
+    <tbody>
+        {%for i in walletData%}
+            <tr>
+                <td> 1 </td>
+                <td> {{i["ref_type"]}} </td>
+                <th scope="col">{{i["context_name"]}}</th>
+                <td> {{i["amount"]}} </td>
+                <td> {{i["description"]}} </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+{% endblock content %}

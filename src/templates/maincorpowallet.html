@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block addCss %}
+<link href="{{ url_for('static', filename='/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='/assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" />
+{% endblock addCss %}
+
+{% block content %}
+<table id="datatableWallet" class="table text-nowrap w-100">
+    <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">ref_type</th>
+          <th scope="col">context_name</th>
+          <th scope="col">amount</th>
+          <th scope="col">description</th>
+        </tr>    
+    </thead>
+
+  </table>
+{% endblock content %}
+
+{% block addScript %}
+    <script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+{% endblock addScript %}

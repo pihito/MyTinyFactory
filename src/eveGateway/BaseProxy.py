@@ -9,7 +9,7 @@ from requests import HTTPError
 from eveGateway.ssotools import EveSSO, SSOException
 
 class ProxyException(Exception):
-    def __init__(self, message :str):
+    def __init__(self, message :str,code):
         self.message = message
 
 
@@ -21,10 +21,30 @@ class ProxyEve :
             raise ProxyException("ProxyEve - init : sso is empty")
         self.sso = sso
     
-    def request(self,url) -> dict: 
+    def requestPost(self,url,payload,auth = False) -> dict :
         jsonData :dict  = None
         try:
-            headers = {"Authorization": "Bearer {}".format(self.sso.access_token)}
+            headers : dict[str,str] = {"accept": "application/json","Content-Type": "application/json","Cache-Control": "no-cache"}
+            if auth == True :  
+                headers["Authorization"] = "Bearer {}".format(self.sso.access_token)
+            res = requests.post(url, headers=headers,json  = payload)
+            res.raise_for_status()
+            jsonData = res.json()    
+        except HTTPError as e:
+            logging.getLogger().debug(
+                "ProxyEve - init - Fail to get url %s, response code is: %s",url,
+                    res.status_code
+                )
+            
+            raise ProxyException("ProxyEve - init - Fail to get {}".format(url),res.status_code)
+        return jsonData
+
+    def request(self,url,auth = False) -> dict: 
+        jsonData :dict  = None
+        try:
+            headers : dict[str,str] = {"accept": "application/json","Content-Type": "application/json","Cache-Control": "no-cache"}
+            if auth == True :  
+                headers["Authorization"] = "Bearer {}".format(self.sso.access_token)
             res = requests.get(url, headers=headers)
             res.raise_for_status()
             jsonData = res.json()    
@@ -34,5 +54,5 @@ class ProxyEve :
                     res.status_code
                 )
             
-            raise SSOException("ProxyEve - init - Fail to get {}".format(url))
+            raise ProxyException("ProxyEve - init - Fail to get {}".format(url),res.status_code)
         return jsonData
