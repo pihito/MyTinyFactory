@@ -22,7 +22,7 @@
 {% endblock content %}
 
 {% block addScript %}
-    <script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
@@ -32,4 +32,21 @@
     <script src="/assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
     <script src="/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script>
+    $(document).ready(function () {
+      $('#datatableWallet').DataTable({
+          processing: true,
+          serverSide: true,
+          searching: false,
+          columns: [
+            { data: 'id' },
+            { data: 'ref_type' },
+            { data: 'context_name' },
+            { data: 'amount' },
+            { data: 'description' },
+          ],
+          ajax: '/api/corpoJournal',
+      });
+  });
+</script>
 {% endblock addScript %}

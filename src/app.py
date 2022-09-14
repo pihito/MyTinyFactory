@@ -207,6 +207,13 @@ def corpoJournal() :
     walletJournal = CorporationWalletJournalProxy(carac.corporation_id,1,sso)
     return render_template('mainCorporateWalletJournal.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = walletJournal.journal)
 
+@app.route("/corpojournal2")
+@login_required
+def corpoJournal2() :
+    dUser_ref : dict = current_user.get_data().get().to_dict()
+    sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
+    carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
+    return render_template('maincorpowallet.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl())
 
 api.add_resource(ApiCorpoJournal, '/api/corpoJournal')
 
