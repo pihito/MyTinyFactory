@@ -60,7 +60,6 @@ eveScope = [
 
  
 eveGatewayCache = EveGatewayCaching()
-# sso = EveSSO(app.config["ESI_CLIENT_ID"],app.config["ESI_SECRET_KEY"],callbackUrl,["publicData", "esi-wallet.read_character_wallet.v1", "esi-characters.read_contacts.v1", "esi-characters.read_agents_research.v1", "esi-industry.read_character_jobs.v1", "esi-markets.read_character_orders.v1", "esi-characters.read_blueprints.v1"])
 
 
 @login_manager.user_loader
@@ -82,10 +81,10 @@ def root():
 def home():
     app.logger.debug("home - user UUID %s", format(current_user.get_id()))
     text = ""
-    dUser_ref = current_user.get_data().get().to_dict()
+    _dUserRef = current_user.get_data().get().to_dict()
     validToken = False
     # l'utilisateur n' jamais activé le sso à Eve
-    if "access_token" in dUser_ref:
+    if "access_token" in _dUserRef:
         sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
         if sso != None:
             sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
@@ -93,17 +92,17 @@ def home():
         else:
             sso = EveSSO(client_id, app_secret, callbackUrl, eveScope)
             validToken = sso.loadFromEveToken(
-                dUser_ref["access_token"],
-                dUser_ref["refresh_token"],
-                dUser_ref["token_expiry"],
-                dUser_ref["character_name"],
-                dUser_ref["character_id"],
+                _dUserRef["access_token"],
+                _dUserRef["refresh_token"],
+                _dUserRef["token_expiry"],
+                _dUserRef["character_name"],
+                _dUserRef["character_id"],
             )
             eveGatewayCache.AddCarater(current_user.get_id(), sso)
 
         app.logger.debug("home - token valid : %s", validToken)
         protraitUrl = ""
-        if dUser_ref["access_token"] != None and validToken:
+        if _dUserRef["access_token"] != None and validToken:
 
             headers = {"Authorization": "Bearer {}".format(sso.access_token)}
 
@@ -124,7 +123,7 @@ def home():
         return render_template(
             "home.html",
             text=text,
-            dUser_ref=dUser_ref,
+            _dUserRef=_dUserRef,
             ssoUrl=sso.get_auth_url(),
             ssoEve=sso,
             portrait=protraitUrl,
@@ -132,11 +131,11 @@ def home():
     else:
         sso = EveSSO(client_id, app_secret, callbackUrl, eveScope)
         return render_template(
-            "home.html", dUser_ref=dUser_ref, portrait="", ssoEve=sso
+            "home.html", _dUserRef=_dUserRef, portrait="", ssoEve=sso
         )
 
 @app.route("/login", methods=["GET", "POST"])
-def servLogin():
+def serv_login():
     id_token = request.headers["Authorization"].split(" ").pop()
     app.logger.debug("serLogin --- \x1b[31;20m token google reçu %s\x1b[0m")
     user = User.loadFormToken(id_token)
@@ -146,7 +145,6 @@ def servLogin():
     flask_login.login_user(user)
     data = {"message": "Done", "code": "SUCCESS"}
     return redirect(url_for("home"))
-    #return make_response(jsonify(data), 200)
 
 
 @app.route("/sso/callback")
@@ -181,7 +179,7 @@ def callback() :
 
 @app.route("/caracter")
 @login_required
-def caracterCard() : 
+def caracter_card() : 
     dUser_ref : dict = current_user.get_data().get().to_dict()
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
@@ -210,10 +208,10 @@ def corpoJournal() :
 @app.route("/corpojournal2")
 @login_required
 def corpoJournal2() :
-    dUser_ref : dict = current_user.get_data().get().to_dict()
+    dUserRef : dict = current_user.get_data().get().to_dict()
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
-    return render_template('maincorpowallet.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl())
+    return render_template('maincorpowallet.html',dUserRef=dUserRef,ssoEve=sso,portrait=carac.getPhotoUrl())
 
 api.add_resource(ApiCorpoJournal, '/api/corpoJournal')
 
