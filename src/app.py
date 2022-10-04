@@ -123,7 +123,7 @@ def home():
         return render_template(
             "home.html",
             text=text,
-            _dUserRef=_dUserRef,
+            dUser_ref=_dUserRef,
             ssoUrl=sso.get_auth_url(),
             ssoEve=sso,
             portrait=protraitUrl,
@@ -131,7 +131,7 @@ def home():
     else:
         sso = EveSSO(client_id, app_secret, callbackUrl, eveScope)
         return render_template(
-            "home.html", _dUserRef=_dUserRef, portrait="", ssoEve=sso
+            "home.html", dUser_ref=_dUserRef, portrait="", ssoEve=sso
         )
 
 @app.route("/login", methods=["GET", "POST"])
@@ -192,7 +192,7 @@ def gobalcropowallet() :
     dUser_ref : dict = current_user.get_data().get().to_dict()
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
-    corpoWallet : CorporationWalletProxy = CorporationWalletProxy(carac.corporation_id,sso)
+    corpoWallet : CorporationWalletProxy = CorporationWalletProxy(carac.corporation_id,sso,db)
     wallet = corpoWallet.allDivisionByName
     return render_template('mainCorporateWallet.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = wallet)
 
@@ -202,7 +202,8 @@ def corpoJournal() :
     dUser_ref : dict = current_user.get_data().get().to_dict()
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
-    walletJournal = CorporationWalletJournalProxy(carac.corporation_id,1,sso)
+    walletJournal = CorporationWalletJournalProxy(carac.corporation_id,1,sso,db)
+    walletJournal.synch()
     return render_template('mainCorporateWalletJournal.html',dUser_ref=dUser_ref,ssoEve=sso,portrait=carac.getPhotoUrl(),walletData = walletJournal.journal)
 
 @app.route("/corpojournal2")
@@ -211,9 +212,9 @@ def corpoJournal2() :
     dUserRef : dict = current_user.get_data().get().to_dict()
     sso: EveSSO = eveGatewayCache.getSso(current_user.get_id())
     carac: ProxyCaracter = eveGatewayCache.getCaracter(current_user.get_id())
-    return render_template('maincorpowallet.html',dUserRef=dUserRef,ssoEve=sso,portrait=carac.getPhotoUrl())
+    return render_template('maincorpowallet.html',dUser_ref=dUserRef,ssoEve=sso,portrait=carac.getPhotoUrl())
 
-api.add_resource(ApiCorpoJournal, '/api/corpoJournal')
+api.add_resource(ApiCorpoJournal, '/api/corpoJournal',  resource_class_kwargs={'eveGatewayCache' : eveGatewayCache})
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

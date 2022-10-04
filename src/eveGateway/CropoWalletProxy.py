@@ -1,11 +1,17 @@
+from distutils import core
+from datetime import datetime
 import enum
 
 from dataclasses import dataclass
+from heapq import merge
+from multiprocessing.sharedctypes import Value
 from re import T
+from wsgiref.handlers import format_date_time
 
 from eveGateway.BaseProxy import ProxyEve, ProxyException
 from eveGateway.ssotools import EveSSO, SSOException
 from enum import Enum, unique
+from firebase_admin import firestore
 
 @unique
 class ProxyWalletDivisionField(Enum) :
@@ -39,15 +45,20 @@ class proxyWalletJournalField(Enum) :
     f_tax = "tax"
     f_tax_receiver_id  ="tax_receiver_id"
     f_tax_receiver_name = "tax_receiver_name"
+    f_ana_axis1 = "ana_axis1"
+    f_AAAAMM = "AAAAMM"
+    f_AAAAMMDD = "AAAAMMDD"
  
 class CorporationWalletProxy (ProxyEve): 
     _corpo_id: str = None
     _walletdivision : dict = dict()
     _walletdivisionName : dict = dict()
 
-    def __init__(self, corpo_id : str, sso : EveSSO ) : 
+    def __init__(self, corpo_id : str, sso : EveSSO, db ) : 
         super().__init__(sso)
         self._corpo_id = corpo_id
+        self._db = db
+        
         url_path: str = (
                 "https://esi.evetech.net/latest/corporations/{}/wallets".format(
                     corpo_id
@@ -82,7 +93,7 @@ class CorporationWalletProxy (ProxyEve):
     def getDivisionByName(self, divisionName : str) -> int : 
         ret = None
         if divisionName in self._walletdivisionName: 
-            ret = self._walletdivision[_walletdivisionName[divisionName]]
+            ret = self._walletdivision[self._walletdivisionName[divisionName]]
 
     def is_division(self,division : int) ->bool :
         return  division in self._walletdivision
@@ -134,17 +145,21 @@ class CorporationWalletJournalProxy (ProxyEve):
     _walletNumber : str = None
     _walletJournal = list()
 
-    def __init__(self, corpo_id : str, wallet: str,sso : EveSSO ) : 
+    def __init__(self, corpo_id : str, wallet: str,sso : EveSSO,db ) : 
         super().__init__(sso)
         self._corpo_id = corpo_id
         self._walletNumber = wallet
+        self._db = db
+        
+
+    def getDataFromEve(self) : 
         page = 1
         end = False
         while end == False :
             try : 
                 self._url_path: str = (
                     "https://esi.evetech.net/latest/corporations/{}/wallets/{}/journal/?page={}".format(
-                        corpo_id,wallet,page
+                        self._corpo_id,self._walletNumber,page
                     )
                 )
                 self._walletJournal = self._walletJournal + (self.request(self._url_path,True))
@@ -154,9 +169,12 @@ class CorporationWalletJournalProxy (ProxyEve):
              
         #retrieve id to complete the data
         ids = set()
+        _contextType = ["market_transaction_id", "industry_job_id", "contract_id", "type_id" ]
         for d in self._walletJournal : 
-            if proxyWalletJournalField.f_context_id.value in d : 
+            if  proxyWalletJournalField.f_context_id.value in d and proxyWalletJournalField.f_context_id_type.value in d and d[proxyWalletJournalField.f_context_id_type.value] not in _contextType : 
+                
                 ids.add(d[proxyWalletJournalField.f_context_id.value])
+            
             ids.add(d[proxyWalletJournalField.f_first_party_id.value])
             ids.add(d[proxyWalletJournalField.f_second_party_id.value])
             if proxyWalletJournalField.f_tax_receiver_id.value in d : 
@@ -169,7 +187,7 @@ class CorporationWalletJournalProxy (ProxyEve):
             namesById[ n["id"]]   = n["name"]
 
         for d in self._walletJournal :
-            if proxyWalletJournalField.f_context_id.value in d : 
+            if proxyWalletJournalField.f_context_id.value in d and d[proxyWalletJournalField.f_context_id.value] in namesById : 
                 d[proxyWalletJournalField.f_context_name.value] = namesById[d[proxyWalletJournalField.f_context_id.value]]
             else : 
                 d[proxyWalletJournalField.f_context_name.value]  =""
@@ -183,3 +201,73 @@ class CorporationWalletJournalProxy (ProxyEve):
     @property
     def journal(self) : 
         return self._walletJournal
+   
+    def addAnafield(self) : 
+        _type : dict[str, str]= {"bounty_prizes":	"Prine",
+                "agent_mission_time_bonus_reward": "Prine",
+                "agent_mission_reward": "Prine",
+                "corporate_reward_payout": "Incu + Fob",
+                "project_discovery_reward": "Discovery",
+                "market_escrow": "Marché",
+                "contract_price": "contrat",
+                "contract_brokers_fee_corp": "contrat",
+                "corporation_account_withdrawal": "Transfert",
+                "office_rental_fee": "Location bureau",
+                "inheritance": "other",
+                "industry_job_tax": "industrie",
+                "manufacturing": "industrie",
+                "player_donation": "don",
+                "transaction_tax": "Marché",
+                "market_transaction": "Marché",
+                "alliance_maintainance_fee": "other",
+                "asset_safety_recovery_tax": "other",
+                "advertisement_listing_fee": "other",
+                "brokers_fee": "Marché"}
+        ret = {}
+        for d in self._walletJournal : 
+            if d [proxyWalletJournalField.f_ref_type.value] in _type : 
+                d[proxyWalletJournalField.f_ana_axis1.value] = _type[ d[proxyWalletJournalField.f_ref_type.value] ]
+                ldate = d[proxyWalletJournalField.f_date.value]
+                d[proxyWalletJournalField.f_AAAAMM.value] = ldate[0:3] + ldate[4:6]
+                d[proxyWalletJournalField.f_AAAAMMDD.value] = d[proxyWalletJournalField.f_AAAAMM.value] + ldate[7:8]
+
+   
+    def synch(self) : 
+        #on vérifie que des donnée existe 
+        corpoDataRef = self._db.document(u'CorpoWallet/{}'.format(self._corpo_id))
+        corpoData = corpoDataRef.get()
+        if not corpoData.exists : 
+            #création du document corporation et wallet
+            d = {'corpo_id':self._corpo_id}
+            self._db.collection(u'CorpoWallet').add(document_id = str(self._corpo_id), document_data=d)
+            corpoDataRef = self._db.document(u'CorpoWallet/{}'.format(self._corpo_id))
+            r: CollectionReference = corpoDataRef.collection("1")
+            r.add({ 'wallet' : 1 })
+            r =corpoDataRef.collection("2") 
+            r.add({ 'wallet' : 2 })
+            r = corpoDataRef.collection("3")
+            r.add({ 'wallet' : 3 })
+            r = corpoDataRef.collection("4")
+            r.add({ 'wallet' : 4 })
+            r = corpoDataRef.collection("5") 
+            r.add({ 'wallet' : 5 })
+            r = corpoDataRef.collection("6")
+            r.add({ 'wallet' : 6 })
+            r = corpoDataRef.collection("7") 
+            r.add({ 'wallet' : 7 })
+           
+        #récupération du full set eve
+        self.getDataFromEve()
+        #ajout des champs analytique
+        self.addAnafield()
+        
+        #sauvegarde dans la DB
+        #walletDataRef = self._db.document(u'CorpoWallet/{}/{}'.format(self._corpo_id,self._walletNumber))
+        walletDataRef = self._db.document(u'CorpoWallet/98665675/1')
+        for d in self._walletJournal : 
+            walletDataRef.collection(u'transactions').document(d[proxyWalletJournalField.f_id]).set(d)
+            
+       
+
+
+

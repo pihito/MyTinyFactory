@@ -34,7 +34,7 @@ class User :
     @staticmethod
     def loadFormToken(tokenId) : 
         claims = google.oauth2.id_token.verify_firebase_token(
-        tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'))
+        tokenId, HTTP_REQUEST, audience=os.environ.get('GOOGLE_CLOUD_PROJECT'),clock_skew_in_seconds = 60)
         if not claims:
             return None
         id = claims['sub']
